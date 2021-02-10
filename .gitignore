@@ -34,3 +34,4 @@ build/
 
 deviceInfo.json
 data/*
+/src/main/resources/application.yaml
