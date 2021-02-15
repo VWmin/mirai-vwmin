@@ -43,7 +43,7 @@ public class MiraiHelloWorldApplication {
                 //保存设备信息到文件
                 fileBasedDeviceInfo("deviceInfo.json");
                 //修改登录协议
-                setProtocol(BotConfiguration.MiraiProtocol.ANDROID_PAD);
+                setProtocol(MiraiProtocol.ANDROID_PHONE);
                 // setLoginSolver();
                 // setBotLoggerSupplier();
 
