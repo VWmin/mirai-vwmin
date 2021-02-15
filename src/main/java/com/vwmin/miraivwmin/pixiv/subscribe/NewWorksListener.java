@@ -2,7 +2,6 @@ package com.vwmin.miraivwmin.pixiv.subscribe;
 
 import com.vwmin.miraivwmin.event.BotUtil;
 import com.vwmin.miraivwmin.event.ForwardMessageBuilder;
-import com.vwmin.miraivwmin.event.MessageBuilder;
 import com.vwmin.miraivwmin.pixiv.IllustUtils;
 import com.vwmin.miraivwmin.pixiv.ListIllustResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -54,7 +53,7 @@ public class NewWorksListener implements ApplicationListener<NewWorksEvent> {
             try {
                 IllustUtils.asynchronousDownload(illusts);
                 ForwardMessageBuilder msgBuilder = new ForwardMessageBuilder(bot, friend);
-                illusts.forEach((illust) -> msgBuilder.says()
+                illusts.forEach((illust) -> msgBuilder.botSays()
                         .plaintext("来自【"+ illust.getUser().getName() +"】的【"+ illust.getTitle() +"】")
                         .image(friend, genFileName(illust), getMetaSinglePage(illust))
                         .plaintext("\n"));

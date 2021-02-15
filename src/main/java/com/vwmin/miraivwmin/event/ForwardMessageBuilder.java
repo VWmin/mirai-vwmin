@@ -19,7 +19,7 @@ public class ForwardMessageBuilder {
         this.builder = new net.mamoe.mirai.message.data.ForwardMessageBuilder(contact);
     }
 
-    public MessageNode says(){
+    public MessageNode botSays(){
         if (current != null){
             builder.says(bot, current.builder.build());
         }
@@ -55,8 +55,8 @@ public class ForwardMessageBuilder {
             return this;
         }
 
-        public MessageNode says(){
-            return parent.says();
+        public MessageNode botSays(){
+            return parent.botSays();
         }
 
 
