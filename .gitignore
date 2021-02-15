@@ -32,6 +32,10 @@ build/
 ### VS Code ###
 .vscode/
 
+# 登录相关信息
 deviceInfo.json
+cache/*
+# bot数据缓存
 data/*
+# 配置文件
 /src/main/resources/application.yaml
