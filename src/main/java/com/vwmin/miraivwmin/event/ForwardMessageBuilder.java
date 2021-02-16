@@ -3,6 +3,8 @@ package com.vwmin.miraivwmin.event;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.message.data.ForwardMessage;
+import net.mamoe.mirai.message.data.Message;
+import net.mamoe.mirai.message.data.MessageChain;
 
 /**
  * @author vwmin
@@ -17,6 +19,11 @@ public class ForwardMessageBuilder {
     public ForwardMessageBuilder(Bot bot, Contact contact){
         this.bot = bot;
         this.builder = new net.mamoe.mirai.message.data.ForwardMessageBuilder(contact);
+    }
+
+    public ForwardMessageBuilder botSays(Message message){
+        builder.says(bot, message);
+        return this;
     }
 
     public MessageNode botSays(){
