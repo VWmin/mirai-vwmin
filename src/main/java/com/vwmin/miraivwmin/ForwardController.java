@@ -4,13 +4,17 @@ import com.vwmin.miraivwmin.bot.CommandController;
 import com.vwmin.miraivwmin.bot.EmptyCommand;
 import com.vwmin.miraivwmin.bot.Reply;
 import com.vwmin.miraivwmin.event.BotUtil;
+import com.vwmin.miraivwmin.event.ForwardMessageBuilder;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.contact.Friend;
 import net.mamoe.mirai.contact.Group;
 import net.mamoe.mirai.contact.User;
 import net.mamoe.mirai.message.data.*;
+import net.mamoe.mirai.utils.ExternalResource;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.File;
 
 /**
  *
@@ -43,19 +47,25 @@ public class ForwardController implements Reply<EmptyCommand> {
     @Override
     public Message reply(EmptyCommand command, Contact subject, User sender) {
         Bot bot = botUtil.getBot();
-        Group group = bot.getGroupOrFail(813116844);
-        Friend friend = bot.getFriendOrFail(1903215898);
+        Image image = subject.uploadImage(ExternalResource.create(new File("d://share//test.jpg")));
 
-        ForwardMessageBuilder builder = new ForwardMessageBuilder(group);
-        builder.says(bot, "hello")
-                .says(bot, "word");
-        group.sendMessage(builder.build());
+        Group group = bot.getGroup(813116844);
+        assert group != null;
 
-        ForwardMessageBuilder builder2 = new ForwardMessageBuilder(group);
-        builder2.says(bot, "hello")
-                .says(bot, "word");
-        friend.sendMessage(builder2.build());
+        Friend friend = bot.getFriend(1903215898);
+        assert friend != null;
 
-        return null;
+//        group.sendMessage(new ForwardMessageBuilder(bot, group).botSays("contact is group, to group").botSays("redundant msg.").botSays(image).build());
+        friend.sendMessage(new ForwardMessageBuilder(bot, friend).botSays("contact is friend, to friend").botSays("redundant msg.").botSays(image).build());
+//
+//        group.sendMessage(new ForwardMessageBuilder(bot, friend).botSays("contact is friend, to group").botSays("redundant msg.").botSays(image).build());
+//        friend.sendMessage(new ForwardMessageBuilder(bot, group).botSays("contact is group, to friend").botSays("redundant msg.").botSays(image).build());
+
+//        friend.sendMessage(new ForwardMessageBuilder(bot, sender).botSays("contact is user, to friend").botSays("redundant msg.").botSays(image).build());
+//        friend.sendMessage(new ForwardMessageBuilder(bot, subject).botSays("contact is subject, to friend").botSays("redundant msg.").botSays(image).build());
+
+
+            return null;
+//        return new ForwardMessageBuilder(bot, friend).botSays("contact is friend, to subject").botSays("redundant msg.").botSays(image).build();
     }
 }

@@ -21,6 +21,12 @@ public class ForwardMessageBuilder {
         this.builder = new net.mamoe.mirai.message.data.ForwardMessageBuilder(contact);
     }
 
+    public ForwardMessageBuilder botSays(String message){
+        return botSays(new MessageBuilder().plaintext(message).build());
+    }
+
+//    public ForwardMessageBuilder botSays()
+
     public ForwardMessageBuilder botSays(Message message){
         builder.says(bot, message);
         return this;
