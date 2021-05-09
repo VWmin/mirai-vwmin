@@ -1,8 +1,14 @@
 package com.vwmin.miraivwmin.event;
 
+import com.vwmin.miraivwmin.bot.BotThread;
 import net.mamoe.mirai.Bot;
+import net.mamoe.mirai.BotFactory;
+import net.mamoe.mirai.utils.BotConfiguration;
 import org.springframework.context.ApplicationContext;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 /**
  * @author vwmin
@@ -17,10 +23,29 @@ public class BotUtil {
         this.context = context;
     }
 
+    @Async
+    @PostConstruct
+    public void loadBot(){
+        Bot bot = BotFactory.INSTANCE.newBot(212746897, "justmiss.qq", new BotConfiguration() {
+            {
+                //保存设备信息到文件
+                fileBasedDeviceInfo("deviceInfo.json");
+                //修改登录协议
+                setProtocol(MiraiProtocol.ANDROID_PHONE);
+                // setLoginSolver();
+                // setBotLoggerSupplier();
+
+                // noNetworkLog();
+
+            }
+        });
+
+        this.bot = bot;
+
+        new Thread(new BotThread(bot, context), "bot").start();
+    }
+
     public Bot getBot() {
-        if (bot == null){
-            bot = (Bot) context.getBean("bot");
-        }
         return bot;
     }
 }

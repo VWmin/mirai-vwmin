@@ -5,7 +5,7 @@ spring:
     host: 121.36.230.118
     password: justmiss.redis
 bot:
-#  image-home: d://share/
+#  image-home: 'd://share/'
   image-home: 'data/'
   pixiv-api: 'http://207.148.95.137:7000'
 

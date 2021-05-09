@@ -26,17 +26,19 @@ import java.nio.channels.OverlappingFileLockException;
 @Slf4j
 @Component
 public class ImageUtils {
-    public ImageUtils(AppConfig config){
-        setImageHome(config.getImageHome());
-    }
-
     private static String IMAGE_HOME;
+    private final String autowiredImageHome;
 
-    public static void setImageHome(String imageHome){
-        IMAGE_HOME = imageHome;
+    public ImageUtils(AppConfig config) {
+        this.autowiredImageHome = config.getImageHome();
     }
 
-    public static String getImageHome(){
+    @PostConstruct
+    public void setImageHome() {
+        ImageUtils.IMAGE_HOME = autowiredImageHome;
+    }
+
+    public static String getImageHome() {
         return IMAGE_HOME;
     }
 
@@ -45,7 +47,7 @@ public class ImageUtils {
         downloadImage(filename, url, new Header[0]);
     }
 
-    public static void downloadImage(String filename, String url, Header[] headers) throws IOException{
+    public static void downloadImage(String filename, String url, Header[] headers) throws IOException {
         downloadImage(IMAGE_HOME, filename, url, headers);
     }
 
@@ -57,10 +59,10 @@ public class ImageUtils {
         CloseableHttpClient client = HttpClients.createDefault();
         log.info("going to request >>> " + url);
         HttpGet get = new HttpGet(url);
-        if (headers.length != 0){
+        if (headers.length != 0) {
             get.setHeaders(headers);
         }
-        try(CloseableHttpResponse response = client.execute(get)) {
+        try (CloseableHttpResponse response = client.execute(get)) {
 
             InputStream inputStream = response.getEntity().getContent();
 
@@ -73,19 +75,20 @@ public class ImageUtils {
 
     }
 
-    public static boolean isExist(String fileName){
-        return isExist(IMAGE_HOME, fileName);
+    public static boolean notExist(String fileName) {
+        return notExist(IMAGE_HOME, fileName);
     }
 
-    public static boolean isExist(String dirPath, String fileName){
+    public static boolean notExist(String dirPath, String fileName) {
         File file = new File(dirPath.concat(fileName));
-        return file.exists();
+        return !file.exists();
     }
 
     /**
      * 图片保存前检查
-     * @param in 输入流
-     * @param dirPath 文件夹路径
+     *
+     * @param in       输入流
+     * @param dirPath  文件夹路径
      * @param fileName 指定文件名时
      */
     public static void saveImage(InputStream in, String dirPath, String fileName) throws IOException {
@@ -94,9 +97,9 @@ public class ImageUtils {
         Utils.notEmpty(fileName, "文件名不能为空");
 
         File dir = new File(dirPath);
-        if(!dir.exists()){
-            if(!dir.mkdir()) {
-                throw new IOException("文件夹创建失败: "+dirPath);
+        if (!dir.exists()) {
+            if (!dir.mkdir()) {
+                throw new IOException("文件夹创建失败: " + dirPath);
             }
         }
 
@@ -106,17 +109,18 @@ public class ImageUtils {
 
     /**
      * 执行文件写入
-     * @param in 输入流
+     *
+     * @param in   输入流
      * @param file 打开的文件句柄
      */
-    public static void doSave(InputStream in, File file) throws IOException{
+    public static void doSave(InputStream in, File file) throws IOException {
         // file.setReadable(true, false);
         // file.setWritable(true, false);
 
-        if(!file.exists()){
-            if(file.createNewFile()){
-                try(RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
-                    FileChannel fileChannel = randomAccessFile.getChannel()){
+        if (!file.exists()) {
+            if (file.createNewFile()) {
+                try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
+                     FileChannel fileChannel = randomAccessFile.getChannel()) {
 
                     fileChannel.tryLock();
                     byte[] buf = new byte[1024];
@@ -125,12 +129,12 @@ public class ImageUtils {
                         randomAccessFile.write(buf, 0, len);
                     }
 
-                } catch (OverlappingFileLockException e){
+                } catch (OverlappingFileLockException e) {
                     log.warn("其他线程正在操作文件 >> " + file.getAbsolutePath());
                     throw e;
                 }
 
-            }else{
+            } else {
                 throw new IOException("文件创建失败: " + file.getAbsolutePath());
             }
         }

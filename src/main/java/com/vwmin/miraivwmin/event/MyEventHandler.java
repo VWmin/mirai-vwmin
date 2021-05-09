@@ -29,9 +29,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MyEventHandler extends SimpleListenerHost {
 
     private final
-    ApplicationContext applicationContext;
-
-    private final
     Map<String, Reply<?>> commandCache;
 
     private final Map<String, String> alias2bind;
@@ -43,16 +40,15 @@ public class MyEventHandler extends SimpleListenerHost {
     List<CommandInterceptor> commandInterceptors;
 
     public MyEventHandler(ApplicationContext applicationContext, Bot bot) {
-        this.applicationContext  = applicationContext;
         this.commandCache        = new ConcurrentHashMap<>(4);
         this.alias2bind          = new ConcurrentHashMap<>(10);
         this.commandInterceptors = new ArrayList<>();
         this.bot = bot;
 
-        initCommandHandlerBinds();
+        initCommandHandlerBinds(applicationContext);
     }
 
-    private void initCommandHandlerBinds() {
+    private void initCommandHandlerBinds(ApplicationContext applicationContext) {
         Map<String, Object> beansWithAnnotation = applicationContext.getBeansWithAnnotation(CommandController.class);
         beansWithAnnotation.forEach((name, bean) -> {
             if(bean instanceof Reply) {

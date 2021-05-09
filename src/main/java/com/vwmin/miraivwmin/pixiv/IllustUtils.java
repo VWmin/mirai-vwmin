@@ -71,7 +71,7 @@ public class IllustUtils {
 
         for (ListIllustResponse.IllustsBean illust : illusts) {
             String filename = genFileName(illust);
-            if (!ImageUtils.isExist(filename)) {
+            if (ImageUtils.notExist(filename)) {
                 pool.execute(new PixivDownloadTask(illust));
             } else {
                 log.info("pixiv id: {} 已存在，将跳过", illust.getId());

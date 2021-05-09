@@ -33,7 +33,7 @@ public class MessageBuilder {
 
     public MessageBuilder image(Contact contact, String file, String url){
         try{
-            if (!ImageUtils.isExist(file)){
+            if (ImageUtils.notExist(file)){
                 ImageUtils.downloadImage(file, url);
             }
             String path2File = ImageUtils.getImageHome().concat(file);
