@@ -1,6 +1,5 @@
-package com.vwmin.miraivwmin.bot;
+package com.vwmin.miraivwmin.core;
 
-import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;

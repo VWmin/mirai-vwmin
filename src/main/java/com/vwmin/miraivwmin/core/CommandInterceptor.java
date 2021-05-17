@@ -1,4 +1,4 @@
-package com.vwmin.miraivwmin.event;
+package com.vwmin.miraivwmin.core;
 
 import net.mamoe.mirai.contact.Contact;
 

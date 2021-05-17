@@ -1,9 +1,8 @@
-package com.vwmin.miraivwmin.event;
+package com.vwmin.miraivwmin.core;
 
 import com.vwmin.miraivwmin.util.DecorateToSlf4j;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
-import net.mamoe.mirai.event.Events;
 import net.mamoe.mirai.utils.BotConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;

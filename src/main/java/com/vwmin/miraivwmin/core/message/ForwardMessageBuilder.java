@@ -1,10 +1,9 @@
-package com.vwmin.miraivwmin.event;
+package com.vwmin.miraivwmin.core.message;
 
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.message.data.ForwardMessage;
 import net.mamoe.mirai.message.data.Message;
-import net.mamoe.mirai.message.data.MessageChain;
 
 /**
  * @author vwmin

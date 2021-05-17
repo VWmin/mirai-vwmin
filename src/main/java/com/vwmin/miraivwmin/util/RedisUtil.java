@@ -1,4 +1,4 @@
-package com.vwmin.miraivwmin.bot;
+package com.vwmin.miraivwmin.util;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;

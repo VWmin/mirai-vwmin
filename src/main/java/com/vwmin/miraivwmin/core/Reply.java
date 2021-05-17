@@ -1,4 +1,4 @@
-package com.vwmin.miraivwmin.bot;
+package com.vwmin.miraivwmin.core;
 
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.contact.User;

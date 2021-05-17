@@ -1,7 +1,7 @@
 package com.vwmin.miraivwmin.pixiv.subscribe;
 
-import com.vwmin.miraivwmin.event.BotHandler;
-import com.vwmin.miraivwmin.event.ForwardMessageBuilder;
+import com.vwmin.miraivwmin.core.BotHandler;
+import com.vwmin.miraivwmin.core.message.ForwardMessageBuilder;
 import com.vwmin.miraivwmin.pixiv.IllustUtils;
 import com.vwmin.miraivwmin.pixiv.ListIllustResponse;
 import lombok.extern.slf4j.Slf4j;

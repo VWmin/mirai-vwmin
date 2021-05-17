@@ -1,4 +1,4 @@
-package com.vwmin.miraivwmin.event;
+package com.vwmin.miraivwmin.util;
 
 import java.lang.reflect.Type;
 

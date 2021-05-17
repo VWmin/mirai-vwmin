@@ -1,6 +1,6 @@
-package com.vwmin.miraivwmin.event;
+package com.vwmin.miraivwmin.util;
 
-import com.vwmin.miraivwmin.bot.AppConfig;
+import com.vwmin.miraivwmin.core.AppConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Header;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -94,7 +94,7 @@ public class ImageUtils {
     public static void saveImage(InputStream in, String dirPath, String fileName) throws IOException {
         Assert.notNull(in, "文件输入流不能为空");
         Assert.notNull(dirPath, "文件夹路径不能为空");
-        Utils.notEmpty(fileName, "文件名不能为空");
+        ExceptionUtil.notEmpty(fileName, "文件名不能为空");
 
         File dir = new File(dirPath);
         if (!dir.exists()) {

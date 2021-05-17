@@ -1,7 +1,8 @@
-package com.vwmin.miraivwmin.event;
+package com.vwmin.miraivwmin.core;
 
-import com.vwmin.miraivwmin.bot.CommandController;
-import com.vwmin.miraivwmin.bot.Reply;
+import com.vwmin.miraivwmin.core.message.MessageBuilder;
+import com.vwmin.miraivwmin.util.ExceptionUtil;
+import com.vwmin.miraivwmin.util.TypeUtils;
 import kotlin.coroutines.CoroutineContext;
 import lombok.extern.slf4j.Slf4j;
 import net.mamoe.mirai.Bot;
@@ -58,13 +59,13 @@ public class CommandEvent extends SimpleListenerHost {
 
                 if (commandCache.containsKey(bind)){
                     String which = commandCache.get(bind).getClass().getSimpleName();
-                    throw Utils.classError(bean.getClass(), "命令已有其他controller绑定(%s)，请考虑修改bind值(%s)", which, bind);
+                    throw ExceptionUtil.classError(bean.getClass(), "命令已有其他controller绑定(%s)，请考虑修改bind值(%s)", which, bind);
                 }
                 commandCache.put(bind, (Reply<?>) bean);
 
                 for (String alia : alias){
                     if (alias2bind.containsKey(alia)){
-                        log.warn(Utils.classWarning(bean.getClass(), "别名(%s)已被占用，将忽略"), alia);
+                        log.warn(ExceptionUtil.classWarning(bean.getClass(), "别名(%s)已被占用，将忽略"), alia);
                     }else {
                         alias2bind.put(alia, bind);
                     }

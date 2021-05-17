@@ -1,6 +1,7 @@
-package com.vwmin.miraivwmin.event;
+package com.vwmin.miraivwmin.core.message;
 
 
+import com.vwmin.miraivwmin.util.ImageUtils;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.message.data.*;
 import net.mamoe.mirai.utils.ExternalResource;

@@ -1,8 +1,8 @@
 package com.vwmin.miraivwmin.saucenao;
 
-import com.vwmin.miraivwmin.bot.CommandController;
-import com.vwmin.miraivwmin.bot.Reply;
-import com.vwmin.miraivwmin.event.MessageBuilder;
+import com.vwmin.miraivwmin.core.CommandController;
+import com.vwmin.miraivwmin.core.Reply;
+import com.vwmin.miraivwmin.core.message.MessageBuilder;
 import lombok.extern.slf4j.Slf4j;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.contact.User;

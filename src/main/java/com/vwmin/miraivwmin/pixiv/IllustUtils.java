@@ -1,6 +1,6 @@
 package com.vwmin.miraivwmin.pixiv;
 
-import com.vwmin.miraivwmin.event.ImageUtils;
+import com.vwmin.miraivwmin.util.ImageUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Header;
 import org.apache.http.message.BasicHeader;

@@ -1,4 +1,4 @@
-package com.vwmin.miraivwmin.bot;
+package com.vwmin.miraivwmin.util;
 
 import picocli.CommandLine;
 

@@ -1,9 +1,9 @@
 package com.vwmin.miraivwmin.ping;
 
-import com.vwmin.miraivwmin.bot.CommandController;
-import com.vwmin.miraivwmin.bot.EmptyCommand;
-import com.vwmin.miraivwmin.bot.Reply;
-import com.vwmin.miraivwmin.event.MessageBuilder;
+import com.vwmin.miraivwmin.core.CommandController;
+import com.vwmin.miraivwmin.util.EmptyCommand;
+import com.vwmin.miraivwmin.core.Reply;
+import com.vwmin.miraivwmin.core.message.MessageBuilder;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.contact.User;
 import net.mamoe.mirai.message.data.Message;

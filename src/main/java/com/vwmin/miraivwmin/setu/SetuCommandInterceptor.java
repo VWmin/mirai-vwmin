@@ -1,6 +1,6 @@
 package com.vwmin.miraivwmin.setu;
 
-import com.vwmin.miraivwmin.event.CommandInterceptor;
+import com.vwmin.miraivwmin.core.CommandInterceptor;
 import net.mamoe.mirai.contact.Contact;
 import org.springframework.stereotype.Component;
 

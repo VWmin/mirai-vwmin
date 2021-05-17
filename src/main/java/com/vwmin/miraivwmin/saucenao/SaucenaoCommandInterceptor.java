@@ -1,6 +1,6 @@
 package com.vwmin.miraivwmin.saucenao;
 
-import com.vwmin.miraivwmin.event.CommandInterceptor;
+import com.vwmin.miraivwmin.core.CommandInterceptor;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.message.code.MiraiCode;
 import net.mamoe.mirai.message.data.Image;

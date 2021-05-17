@@ -1,8 +1,7 @@
 package com.vwmin.miraivwmin.pixiv.subscribe;
 
-import com.vwmin.miraivwmin.bot.CommandController;
-import com.vwmin.miraivwmin.bot.Reply;
-import com.vwmin.miraivwmin.event.MessageBuilder;
+import com.vwmin.miraivwmin.core.Reply;
+import com.vwmin.miraivwmin.core.message.MessageBuilder;
 import com.vwmin.miraivwmin.pixiv.PixivApi;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.contact.User;

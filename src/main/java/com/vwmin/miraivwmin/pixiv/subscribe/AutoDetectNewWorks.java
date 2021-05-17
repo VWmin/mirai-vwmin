@@ -1,7 +1,7 @@
 package com.vwmin.miraivwmin.pixiv.subscribe;
 
 
-import com.vwmin.miraivwmin.bot.RedisUtil;
+import com.vwmin.miraivwmin.util.RedisUtil;
 import com.vwmin.miraivwmin.pixiv.ListIllustResponse;
 import com.vwmin.miraivwmin.pixiv.PixivApi;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
