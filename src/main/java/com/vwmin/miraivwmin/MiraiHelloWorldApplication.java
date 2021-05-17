@@ -1,14 +1,9 @@
 package com.vwmin.miraivwmin;
 
-import com.vwmin.miraivwmin.event.MyEventHandler;
 import lombok.extern.slf4j.Slf4j;
-import net.mamoe.mirai.Bot;
-import net.mamoe.mirai.BotFactory;
-import net.mamoe.mirai.utils.BotConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 
@@ -29,12 +24,7 @@ public class MiraiHelloWorldApplication {
 //        System.setProperty("https.proxyHost", "localhost");
 //        System.setProperty("https.proxyPort", "9888");
 
-        ApplicationContext context = SpringApplication.run(MiraiHelloWorldApplication.class, args);
-
-
-        for (String name : context.getBeanDefinitionNames()) {
-            System.out.println(name);
-        }
+        SpringApplication.run(MiraiHelloWorldApplication.class, args);
 
     }
 

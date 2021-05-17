@@ -13,7 +13,7 @@ import net.mamoe.mirai.message.data.Message;
  * @version 1.0
  * @date 2021/1/31 16:46
  */
-@CommandController(bind = "订阅")
+//@CommandController(bind = "订阅")
 public class SubscribeController implements Reply<SubscribeCommand> {
 
     private final PixivApi pixivApi;

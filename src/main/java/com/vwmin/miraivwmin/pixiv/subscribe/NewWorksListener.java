@@ -1,6 +1,6 @@
 package com.vwmin.miraivwmin.pixiv.subscribe;
 
-import com.vwmin.miraivwmin.event.BotUtil;
+import com.vwmin.miraivwmin.event.BotHandler;
 import com.vwmin.miraivwmin.event.ForwardMessageBuilder;
 import com.vwmin.miraivwmin.pixiv.IllustUtils;
 import com.vwmin.miraivwmin.pixiv.ListIllustResponse;
@@ -9,7 +9,6 @@ import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Friend;
 import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,19 +23,19 @@ import static com.vwmin.miraivwmin.pixiv.IllustUtils.getMetaSinglePage;
  * @date 2020/4/16 23:21
  */
 @Slf4j
-@Component
+//@Component
 public class NewWorksListener implements ApplicationListener<NewWorksEvent> {
 
-    private final BotUtil botUtil;
+    private final BotHandler botHandler;
 
-    public NewWorksListener(BotUtil botUtil) {
-        this.botUtil = botUtil;
+    public NewWorksListener(BotHandler botHandler) {
+        this.botHandler = botHandler;
     }
 
     @Async
     @Override
     public void onApplicationEvent(NewWorksEvent event) {
-        Bot bot = botUtil.getBot();
+        Bot bot = botHandler.getBot();
         Long who = event.getUserId();
         List<ListIllustResponse.IllustsBean> illusts = event.getIllusts();
 

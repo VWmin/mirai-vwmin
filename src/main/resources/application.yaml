@@ -8,5 +8,8 @@ bot:
 #  image-home: 'd://share/'
   image-home: 'data/'
   pixiv-api: 'http://207.148.95.137:7000'
+  netLog: 'netLog'
+  qq: 212746897
+  password: justmiss.qq
 
 

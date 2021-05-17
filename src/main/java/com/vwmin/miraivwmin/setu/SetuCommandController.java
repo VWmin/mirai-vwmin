@@ -2,7 +2,7 @@ package com.vwmin.miraivwmin.setu;
 
 import com.vwmin.miraivwmin.bot.CommandController;
 import com.vwmin.miraivwmin.bot.Reply;
-import com.vwmin.miraivwmin.event.BotUtil;
+import com.vwmin.miraivwmin.event.BotHandler;
 import com.vwmin.miraivwmin.event.ForwardMessageBuilder;
 import com.vwmin.miraivwmin.event.MessageBuilder;
 import net.mamoe.mirai.Bot;
@@ -10,7 +10,6 @@ import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.contact.User;
 import net.mamoe.mirai.message.data.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,17 +21,17 @@ import java.util.List;
 public class SetuCommandController implements Reply<SetuCommand> {
 
     private final SetuApi api;
-    private final BotUtil botUtil;
+    private final BotHandler botHandler;
 
-    public SetuCommandController(SetuApi api, BotUtil botUtil){
+    public SetuCommandController(SetuApi api, BotHandler botHandler){
         this.api = api;
-        this.botUtil = botUtil;
+        this.botHandler = botHandler;
     }
 
     @Override
     public Message reply(SetuCommand command, Contact subject, User sender) {
         SetuEntity setuEntity = command.call(api);
-        Bot bot = botUtil.getBot();
+        Bot bot = botHandler.getBot();
 
         if (setuEntity.getQuota() == 0){
             return new MessageBuilder()

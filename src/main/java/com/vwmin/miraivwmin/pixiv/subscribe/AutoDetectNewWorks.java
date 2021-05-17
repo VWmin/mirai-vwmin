@@ -22,7 +22,7 @@ import java.util.Map;
  * @date 2020/4/16 23:13
  */
 @Slf4j
-@Service
+//@Service
 @EnableAsync
 @EnableScheduling
 public class AutoDetectNewWorks {

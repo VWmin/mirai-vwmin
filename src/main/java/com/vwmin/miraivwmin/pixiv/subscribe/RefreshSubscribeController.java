@@ -13,7 +13,7 @@ import net.mamoe.mirai.message.data.Message;
  * @version 1.0
  * @date 2021/1/31 19:15
  */
-@CommandController(bind = "刷新订阅")
+//@CommandController(bind = "刷新订阅")
 public class RefreshSubscribeController implements Reply<EmptyCommand> {
 
     private final AutoDetectNewWorks autoDetectNewWorks;

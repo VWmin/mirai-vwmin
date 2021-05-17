@@ -26,7 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2021/1/7 14:48
  */
 @Slf4j
-public class MyEventHandler extends SimpleListenerHost {
+public class CommandEvent extends SimpleListenerHost {
 
     private final
     Map<String, Reply<?>> commandCache;
@@ -39,7 +39,7 @@ public class MyEventHandler extends SimpleListenerHost {
     private final
     List<CommandInterceptor> commandInterceptors;
 
-    public MyEventHandler(ApplicationContext applicationContext, Bot bot) {
+    public CommandEvent(ApplicationContext applicationContext, Bot bot) {
         this.commandCache        = new ConcurrentHashMap<>(4);
         this.alias2bind          = new ConcurrentHashMap<>(10);
         this.commandInterceptors = new ArrayList<>();
@@ -109,17 +109,14 @@ public class MyEventHandler extends SimpleListenerHost {
 
         log.info("args >>> " + Arrays.toString(args));
 
-        //获得execute函数
+        //获得reply函数
         Method executeMethod = Reply.class.getMethod("reply", Object.class, Contact.class, User.class);
-        //获得execute函数的实际参数类型 fixme: 这里有相当多的假定
+        //获得reply函数泛型的实际类型，用于交给CommandLine注入字段
         Type actualTypeArgument = ((ParameterizedType) commandController.getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0];
-
-//        log.info("actualType: " + actualTypeArgument);
-
         Object commandInstance = TypeUtils.getClass(actualTypeArgument).newInstance();
         // 获得command实例后，写入参数
         new CommandLine(commandInstance).parseArgs(subArgs(args));
-        //执行execute函数
+        //执行reply函数
         Message message;
         try{
             message = (Message) executeMethod.invoke(commandController, commandInstance, subject, sender);
@@ -130,19 +127,12 @@ public class MyEventHandler extends SimpleListenerHost {
             log.error("内部错误：{}", e.getCause().getMessage());
             e.printStackTrace();
         }
-        //发送消息
 
+        //发送消息
         if (message != null) {
             subject.sendMessage(message);
         }
 
-        //发送图片的方法
-//        if (event.getSender().getId() == 1903215898L){
-//            Image image = event.getSubject().uploadImage(ExternalResource.create(new File("d://test.png")));
-//            event.getSender().sendMessage(image);
-//        }
-
-        // 无返回值, 表示一直监听事件.
     }
 
     private String[] subArgs(String[] args) {
