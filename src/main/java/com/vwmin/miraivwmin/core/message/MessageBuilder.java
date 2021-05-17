@@ -16,13 +16,16 @@ import java.io.IOException;
  */
 public class MessageBuilder {
     private final MessageChainBuilder builder = new MessageChainBuilder();
-    public MessageBuilder(){}
 
-    public MessageBuilder plaintext(String text){
+    public MessageBuilder() {
+    }
+
+    public MessageBuilder plaintext(String text) {
         builder.append(new PlainText(text));
         return this;
     }
-    public MessageBuilder at(Long id){
+
+    public MessageBuilder at(Long id) {
         builder.append(new At(id));
         return this;
     }
@@ -32,24 +35,29 @@ public class MessageBuilder {
         return this;
     }
 
-    public MessageBuilder image(Contact contact, String file, String url){
-        try{
-            if (ImageUtils.notExist(file)){
+    public MessageBuilder image(Contact contact, String file, String url) {
+        try {
+            if (ImageUtils.notExist(file)) {
                 ImageUtils.downloadImage(file, url);
             }
             String path2File = ImageUtils.getImageHome().concat(file);
             Image image = contact.uploadImage(ExternalResource.create(new File(path2File)));
             builder.append(image);
 
-        }catch (IOException e){
-            builder.append(new PlainText("下载错误："+e.getMessage()));
+        } catch (IOException e) {
+            builder.append(new PlainText("下载错误：" + e.getMessage()));
             //fixme
             e.printStackTrace();
         }
         return this;
     }
 
-    public MessageChain build(){
+    public MessageChain voice(Contact contact, String path2File) {
+        Voice voice = ExternalResource.uploadAsVoice(ExternalResource.create(new File(path2File)), contact);
+        return builder.append(voice).build();
+    }
+
+    public MessageChain build() {
         return builder.build();
     }
 
