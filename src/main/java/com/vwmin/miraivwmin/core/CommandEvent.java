@@ -113,7 +113,8 @@ public class CommandEvent extends SimpleListenerHost {
         //获得reply函数
         Method executeMethod = Reply.class.getMethod("reply", Object.class, Contact.class, User.class);
         //获得reply函数泛型的实际类型，用于交给CommandLine注入字段
-        Type actualTypeArgument = ((ParameterizedType) commandController.getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0];
+        Type actualTypeArgument = getActualTypeArgument(commandController);
+        //获得实际类型的实例
         Object commandInstance = TypeUtils.getClass(actualTypeArgument).newInstance();
         // 获得command实例后，写入参数
         new CommandLine(commandInstance).parseArgs(subArgs(args));
@@ -141,6 +142,20 @@ public class CommandEvent extends SimpleListenerHost {
             return new String[0];
         }
         return Arrays.copyOfRange(args, 1, args.length);
+    }
+
+    private Type getActualTypeArgument(Reply<?> commandController){
+        // 找到实现接口中的Reply
+        for (Type anInterface : commandController.getClass().getGenericInterfaces()) {
+            if (anInterface instanceof ParameterizedType){
+                if (((ParameterizedType) anInterface).getRawType().getTypeName().equals(Reply.class.getTypeName())){
+                    // 获得实现时填入的具体参数
+                    return ((ParameterizedType) anInterface).getActualTypeArguments()[0];
+                }
+            }
+        }
+        // 实际上不会执行到
+        return null;
     }
 
 //    @NotNull
