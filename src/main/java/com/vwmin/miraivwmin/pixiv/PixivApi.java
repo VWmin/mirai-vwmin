@@ -1,9 +1,6 @@
 package com.vwmin.miraivwmin.pixiv;
 
-import com.vwmin.restproxy.annotations.Body;
-import com.vwmin.restproxy.annotations.GET;
-import com.vwmin.restproxy.annotations.POST;
-import com.vwmin.restproxy.annotations.Query;
+import com.vwmin.restproxy.annotations.*;
 
 /**
  * @author vwmin
@@ -15,5 +12,5 @@ public interface PixivApi {
     ListIllustResponse getNewWorks(@Query("username") String username);
 
     @POST("/login")
-    String login(@Body("username") String username, @Body("password") String password);
+    String login(@Field("username") String username, @Field("password") String password);
 }

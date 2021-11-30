@@ -33,24 +33,20 @@ public class SetuCommandController implements Reply<SetuCommand> {
         SetuEntity setuEntity = command.call(api);
         Bot bot = botHandler.getBot();
 
-        if (setuEntity.getQuota() == 0){
-            return new MessageBuilder()
-                    .at(sender.getId())
-                    .plaintext("没了")
-                    .build();
-        }else{
-            List<SetuEntity.DataBean> setuList = setuEntity.getData();
-            if (setuList.size() == 1){
-                return singleSetuMessage(sender, subject, setuList.get(0));
-            }else{
-                ForwardMessageBuilder builder = new ForwardMessageBuilder(bot, subject);
-                for (SetuEntity.DataBean setu : setuList) {
-                    builder.botSays(singleSetuMessage(sender, subject, setu));
-                }
-                return builder.build();
-            }
 
+
+        List<SetuEntity.DataBean> setuList = setuEntity.getData();
+        if (setuList.size() == 1){
+            return singleSetuMessage(sender, subject, setuList.get(0));
+        }else{
+            ForwardMessageBuilder builder = new ForwardMessageBuilder(bot, subject);
+            for (SetuEntity.DataBean setu : setuList) {
+                builder.botSays(singleSetuMessage(sender, subject, setu));
+            }
+            return builder.build();
         }
+
+
     }
 
     private Message singleSetuMessage(User sender, Contact subject, SetuEntity.DataBean setu){
