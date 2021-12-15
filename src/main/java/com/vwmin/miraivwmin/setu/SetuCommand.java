@@ -20,7 +20,11 @@ public class SetuCommand {
     @CommandLine.Option(names = {"-n", "--num"}, description = "一次请求的数量")
     private int num = 1;
 
-    public SetuEntity call(SetuApi api) {
-        return api.setu(r18, word, num, null, null);
+    public SetuEntity call(SetuApiV2 api) {
+        return api.setu(
+                new SetuRequestEntity.Builder()
+                        .tag(word).num(num).r18(r18)
+                        .build()
+        );
     }
 }

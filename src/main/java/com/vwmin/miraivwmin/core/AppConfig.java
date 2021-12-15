@@ -3,6 +3,7 @@ package com.vwmin.miraivwmin.core;
 import com.vwmin.miraivwmin.pixiv.PixivApi;
 import com.vwmin.miraivwmin.setu.SetuApi;
 import com.vwmin.miraivwmin.saucenao.SaucenaoApi;
+import com.vwmin.miraivwmin.setu.SetuApiV2;
 import com.vwmin.restproxy.RestProxy;
 import lombok.Getter;
 import lombok.Setter;
@@ -52,6 +53,12 @@ public class AppConfig {
     public SetuApi setuApi(@Qualifier("normalRestTemplate") RestTemplate restTemplate){
         final String setuUrl = "https://api.lolicon.app";
         return new RestProxy<>(setuUrl, SetuApi.class, restTemplate).getApi();
+    }
+
+    @Bean
+    public SetuApiV2 setuApiV2(@Qualifier("normalRestTemplate") RestTemplate restTemplate){
+        final String setuUrl = "https://api.lolicon.app";
+        return new RestProxy<>(setuUrl, SetuApiV2.class, restTemplate).getApi();
     }
 
     @Bean

@@ -5,6 +5,7 @@ import com.vwmin.miraivwmin.core.Reply;
 import com.vwmin.miraivwmin.core.BotHandler;
 import com.vwmin.miraivwmin.core.message.ForwardMessageBuilder;
 import com.vwmin.miraivwmin.core.message.MessageBuilder;
+import lombok.extern.slf4j.Slf4j;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.contact.User;
@@ -17,20 +18,23 @@ import java.util.List;
  * @version 1.0
  * @date 2021/1/7 17:12
  */
+@Slf4j
 @CommandController(bind = "setu", alias = {"一张色图"})
 public class SetuCommandController implements Reply<SetuCommand> {
 
     private final SetuApi api;
+    private final SetuApiV2 apiV2;
     private final BotHandler botHandler;
 
-    public SetuCommandController(SetuApi api, BotHandler botHandler){
+    public SetuCommandController(SetuApi api, SetuApiV2 apiV2, BotHandler botHandler){
         this.api = api;
+        this.apiV2 = apiV2;
         this.botHandler = botHandler;
     }
 
     @Override
     public Message reply(SetuCommand command, Contact subject, User sender) {
-        SetuEntity setuEntity = command.call(api);
+        SetuEntity setuEntity = command.call(apiV2);
         Bot bot = botHandler.getBot();
 
 
@@ -51,7 +55,7 @@ public class SetuCommandController implements Reply<SetuCommand> {
 
     private Message singleSetuMessage(User sender, Contact subject, SetuEntity.DataBean setu){
         MessageBuilder builder = new MessageBuilder();
-        String imgUrl = setu.getUrl();
+        String imgUrl = setu.getUrls().getOriginal();
         String file = setu.getPid() + imgUrl.substring(imgUrl.length() - 4);
         return builder
                 .at(sender.getId())

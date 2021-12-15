@@ -9,6 +9,8 @@ import com.vwmin.restproxy.annotations.Query;
  * @version 1.0
  * @date 2021/1/7 15:06
  */
+
+@Deprecated
 public interface SetuApi {
     @LogRequest
     @GET("/setu/?apikey=868808285e98546c502464&proxy=i.pixiv.re")
