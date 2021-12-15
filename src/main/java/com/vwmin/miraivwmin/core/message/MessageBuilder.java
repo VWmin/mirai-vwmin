@@ -40,13 +40,18 @@ public class MessageBuilder {
             if (ImageUtils.notExist(file)) {
                 ImageUtils.downloadImage(file, url);
             }
-            String path2File = ImageUtils.getImageHome().concat(file);
-            Image image = contact.uploadImage(ExternalResource.create(new File(path2File)));
-            builder.append(image);
-
         } catch (IOException e) {
             builder.append(new PlainText("下载错误：" + e.getMessage()));
-            //fixme
+            e.printStackTrace();
+        }
+
+        String path2File = ImageUtils.getImageHome().concat(file);
+
+        try(ExternalResource imageRes = ExternalResource.create(new File(path2File))) {
+            Image image = contact.uploadImage(imageRes);
+            builder.append(image);
+        } catch (IOException e) {
+            builder.append(new PlainText("发送错误：" + e.getMessage()));
             e.printStackTrace();
         }
         return this;

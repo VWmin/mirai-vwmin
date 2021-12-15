@@ -11,7 +11,7 @@ import com.vwmin.restproxy.annotations.Query;
  */
 public interface SetuApi {
     @LogRequest
-    @GET("/setu/?apikey=868808285e98546c502464")
+    @GET("/setu/?apikey=868808285e98546c502464&proxy=i.pixiv.re")
     SetuEntity setu(
             @Query(value = "r18", required = false) int r18,
             @Query(value = "keyword", required = false) String keyword,

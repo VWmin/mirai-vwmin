@@ -54,7 +54,7 @@ public class BotHandler implements ApplicationRunner {
                 // setLoginSolver();
                 setBotLoggerSupplier(bot -> new DecorateToSlf4j());
                 // 重定向网络日志到文件
-                redirectNetworkLogToDirectory(new File(netLogPath));
+//                redirectNetworkLogToDirectory(new File(netLogPath));
 
             }
         });
