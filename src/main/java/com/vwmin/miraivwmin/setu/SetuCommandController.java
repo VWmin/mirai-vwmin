@@ -40,7 +40,10 @@ public class SetuCommandController implements Reply<SetuCommand> {
 
 
         List<SetuEntity.DataBean> setuList = setuEntity.getData();
-        if (setuList.size() <= 1){
+        if (setuList.size() == 0) {
+            return new MessageBuilder().plaintext("啥也没找到惹～").build();
+        }
+        if (setuList.size() == 1){
             return singleSetuMessage(sender, subject, setuList.get(0));
         }else{
             ForwardMessageBuilder builder = new ForwardMessageBuilder(bot, subject);

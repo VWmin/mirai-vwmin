@@ -16,7 +16,7 @@ public class SetuCommand {
     @CommandLine.Option(names = {"-r", "--r18"}, description = "指定r18等级；0: 无, 1: 有, 2：混合")
     private int r18;
 
-    @CommandLine.Option(names = {"-w", "--word"}, description = "指定关键词")
+    @CommandLine.Parameters(description = "指定关键词")
     private List<String> word;
 
     @CommandLine.Option(names = {"-n", "--num"}, description = "一次请求的数量")

@@ -15,6 +15,10 @@ import java.util.List;
 public class SetuRequestEntity {
     private int num = 1;
     private int r18 = 0;
+    /**
+     * 一维数组的时候是元素间是and
+     * 二维数组的时候元素间是or，数组间是and
+     */
     List<String> tag = new ArrayList<>();
     String proxy = "i.pixiv.re";
 

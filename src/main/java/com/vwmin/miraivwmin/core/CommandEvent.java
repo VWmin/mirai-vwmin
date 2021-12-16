@@ -117,8 +117,7 @@ public class CommandEvent extends SimpleListenerHost {
         //获得实际类型的实例
         Object commandInstance = TypeUtils.getClass(actualTypeArgument).newInstance();
         // 获得command实例后，写入参数
-        CommandLine.ParseResult parseResult = new CommandLine(commandInstance).parseArgs(subArgs(args));
-        log.info("{}", parseResult);
+        new CommandLine(commandInstance).parseArgs(subArgs(args));
         //执行reply函数
         Message message;
         try{
