@@ -82,7 +82,7 @@ public class CommandEvent extends SimpleListenerHost {
     public void handleException(@NotNull CoroutineContext context, @NotNull Throwable exception){
         Objects.requireNonNull(bot.getFriend(1903215898L)).sendMessage(
                 new MessageBuilder()
-                .plaintext(exception.getMessage())
+                .plaintext(exception.getMessage() + ": " + exception.getCause().getMessage())
                 .build()
         );
         // 处理事件处理时抛出的异常
@@ -117,7 +117,8 @@ public class CommandEvent extends SimpleListenerHost {
         //获得实际类型的实例
         Object commandInstance = TypeUtils.getClass(actualTypeArgument).newInstance();
         // 获得command实例后，写入参数
-        new CommandLine(commandInstance).parseArgs(subArgs(args));
+        CommandLine.ParseResult parseResult = new CommandLine(commandInstance).parseArgs(subArgs(args));
+        log.info("{}", parseResult);
         //执行reply函数
         Message message;
         try{

@@ -3,6 +3,7 @@ package com.vwmin.miraivwmin.setu;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,6 +33,11 @@ public class SetuRequestEntity {
 
         public Builder tag(String tag) {
             request.tag.add(tag);
+            return this;
+        }
+
+        public Builder tag(List<String> tags) {
+            request.tag.addAll(tags);
             return this;
         }
 

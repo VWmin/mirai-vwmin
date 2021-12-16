@@ -2,6 +2,8 @@ package com.vwmin.miraivwmin.setu;
 
 import picocli.CommandLine;
 
+import java.util.List;
+
 
 /**
  * @author vwmin
@@ -15,7 +17,7 @@ public class SetuCommand {
     private int r18;
 
     @CommandLine.Option(names = {"-w", "--word"}, description = "指定关键词")
-    private String word;
+    private List<String> word;
 
     @CommandLine.Option(names = {"-n", "--num"}, description = "一次请求的数量")
     private int num = 1;
