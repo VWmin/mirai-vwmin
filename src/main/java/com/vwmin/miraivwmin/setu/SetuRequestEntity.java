@@ -41,7 +41,9 @@ public class SetuRequestEntity {
         }
 
         public Builder tag(List<String> tags) {
-            request.tag.addAll(tags);
+            if(tags != null && tags.size()!=0) {
+                request.tag.addAll(tags);
+            }
             return this;
         }
 

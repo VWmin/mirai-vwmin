@@ -50,12 +50,6 @@ public class AppConfig {
     }
 
     @Bean
-    public SetuApi setuApi(@Qualifier("normalRestTemplate") RestTemplate restTemplate){
-        final String setuUrl = "https://api.lolicon.app";
-        return new RestProxy<>(setuUrl, SetuApi.class, restTemplate).getApi();
-    }
-
-    @Bean
     public SetuApiV2 setuApiV2(@Qualifier("normalRestTemplate") RestTemplate restTemplate){
         final String setuUrl = "https://api.lolicon.app";
         return new RestProxy<>(setuUrl, SetuApiV2.class, restTemplate).getApi();

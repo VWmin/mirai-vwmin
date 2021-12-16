@@ -22,12 +22,10 @@ import java.util.List;
 @CommandController(bind = "setu", alias = {"一张色图"})
 public class SetuCommandController implements Reply<SetuCommand> {
 
-    private final SetuApi api;
     private final SetuApiV2 apiV2;
     private final BotHandler botHandler;
 
-    public SetuCommandController(SetuApi api, SetuApiV2 apiV2, BotHandler botHandler){
-        this.api = api;
+    public SetuCommandController(SetuApiV2 apiV2, BotHandler botHandler){
         this.apiV2 = apiV2;
         this.botHandler = botHandler;
     }
