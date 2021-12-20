@@ -102,6 +102,9 @@ public class CommandEvent extends SimpleListenerHost {
 
         //分割命令
         String[] args = miraiCode.split("\\s+");
+        if  (args.length == 0) {
+            return;
+        }
 
         Reply<?> commandController = commandCache.get(alias2bind.getOrDefault(args[0], ""));
         if (commandController == null){
