@@ -35,8 +35,6 @@ public class SetuCommandController implements Reply<SetuCommand> {
         SetuEntity setuEntity = command.call(apiV2);
         Bot bot = botHandler.getBot();
 
-
-
         List<SetuEntity.DataBean> setuList = setuEntity.getData();
         if (setuList.size() == 0) {
             return new MessageBuilder().plaintext("啥也没找到惹～").build();
@@ -58,6 +56,11 @@ public class SetuCommandController implements Reply<SetuCommand> {
         MessageBuilder builder = new MessageBuilder();
         String imgUrl = setu.getUrls().getOriginal();
         String file = setu.getPid() + imgUrl.substring(imgUrl.length() - 4);
+
+        if (setu.getR18() && sender.getId() != 1903215898L) {
+            return builder.plaintext("你寄吧谁¿").build();
+        }
+
         return builder
                 .at(sender.getId())
                 .image(subject, file, imgUrl)

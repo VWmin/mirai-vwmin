@@ -41,3 +41,5 @@ data/*
 /src/main/resources/application.yaml
 # 网络日志
 netLog/*
+# 5kcy结果
+5kcy/out

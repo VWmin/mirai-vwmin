@@ -47,6 +47,10 @@ public class MessageBuilder {
 
         String path2File = ImageUtils.getImageHome().concat(file);
 
+        return image(contact, path2File);
+    }
+
+    public MessageBuilder image(Contact contact, String path2File){
         try(ExternalResource imageRes = ExternalResource.create(new File(path2File))) {
             Image image = contact.uploadImage(imageRes);
             builder.append(image);
