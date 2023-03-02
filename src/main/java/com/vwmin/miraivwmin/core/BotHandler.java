@@ -50,7 +50,7 @@ public class BotHandler implements ApplicationRunner {
                 //保存设备信息到文件
                 fileBasedDeviceInfo("deviceInfo.json");
                 //修改登录协议
-                setProtocol(MiraiProtocol.ANDROID_PHONE);
+                setProtocol(MiraiProtocol.ANDROID_WATCH);
                 // setLoginSolver();
                 setBotLoggerSupplier(bot -> new DecorateToSlf4j());
                 // 重定向网络日志到文件

@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * @version 1.0
  * @date 2021/1/11 15:43
  */
-@Component
+//@Component
 public class SetuCommandInterceptor implements CommandInterceptor {
     private final Pattern REGEX = Pattern.compile(".*([一张色图]).*([一张色图]).*([一张色图]).*([一张色图]).*");
 

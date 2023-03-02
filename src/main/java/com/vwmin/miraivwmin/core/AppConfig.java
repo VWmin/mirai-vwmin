@@ -1,5 +1,6 @@
 package com.vwmin.miraivwmin.core;
 
+import com.vwmin.miraivwmin.chat.GPTApi;
 import com.vwmin.miraivwmin.pixiv.PixivApi;
 import com.vwmin.miraivwmin.setu.SetuApi;
 import com.vwmin.miraivwmin.saucenao.SaucenaoApi;
@@ -12,6 +13,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +38,7 @@ import org.springframework.web.client.RestTemplate;
 public class AppConfig {
     private String pixivApi;
     private String imageHome;
+    private String gptKey;
 
     @Bean("normalRestTemplate")
     public RestTemplate normalRestTemplate(){
@@ -47,6 +50,12 @@ public class AppConfig {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(factory);
         return restTemplate;
+    }
+
+    @Bean
+    public GPTApi gptApi(@Qualifier("normalRestTemplate") RestTemplate restTemplate)  {
+        final String url = "https://api.openai.com/v1";
+        return new RestProxy<>(url, GPTApi.class, restTemplate).getApi();
     }
 
     @Bean

@@ -2,6 +2,7 @@ package com.vwmin.miraivwmin.core.message;
 
 
 import com.vwmin.miraivwmin.util.ImageUtils;
+import net.mamoe.mirai.contact.AudioSupported;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.message.data.*;
 import net.mamoe.mirai.utils.ExternalResource;
@@ -61,9 +62,9 @@ public class MessageBuilder {
         return this;
     }
 
-    public MessageChain voice(Contact contact, String path2File) {
-        Voice voice = ExternalResource.uploadAsVoice(ExternalResource.create(new File(path2File)), contact);
-        return builder.append(voice).build();
+    public MessageChain voice(AudioSupported audioSupported, String path2File) {
+        Audio audio = audioSupported.uploadAudio(ExternalResource.create(new File(path2File)));
+        return builder.append(audio).build();
     }
 
     public MessageChain build() {
