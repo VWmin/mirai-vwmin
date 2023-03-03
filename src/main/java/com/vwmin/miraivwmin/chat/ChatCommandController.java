@@ -26,14 +26,12 @@ public class ChatCommandController implements Reply<ChatCommand> {
       this.gptApi = gptApi;
    }
 
-   private final List<ChatMessage> conversation = new ArrayList<>();
 
    @Override
    public Message reply(ChatCommand command, Contact subject, User sender) {
       try{
-         ResponseBody resp = command.call(gptApi, conversation);
+         ResponseBody resp = command.call(gptApi);
          ChatMessage chatMessage = resp.getChoices().get(0).message;
-         conversation.add(chatMessage);
          return new MessageBuilder().at(sender.getId()).plaintext(chatMessage.content).build();
       } catch (HttpClientErrorException.TooManyRequests  e) {
          return new MessageBuilder().plaintext("少女祈祷中...").build();

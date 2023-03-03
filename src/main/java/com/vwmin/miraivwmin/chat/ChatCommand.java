@@ -3,6 +3,7 @@ package com.vwmin.miraivwmin.chat;
 import picocli.CommandLine;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author vwmin
@@ -15,16 +16,27 @@ public class ChatCommand {
     private List<String> word;
 
     @CommandLine.Option(names = {"-s", "--system"})
-    private boolean system = false;
+    private boolean system;
 
-    public ResponseBody call(GPTApi api, List<ChatMessage> conversation) {
+    @CommandLine.Option(names = {"-r"})
+    private boolean r;
+
+    public ResponseBody call(GPTApi api) {
         StringBuilder sb = new StringBuilder();
-        word.forEach(w -> sb.append(w).append(" "));
+        Optional.of(word).ifPresent(e -> e.forEach(w->sb.append(w).append(" ")));
+        String content = sb.toString();
+
+        List<ChatMessage> conversation;
+        if (r) {
+            conversation = ConversationSet.r();
+        } else {
+            conversation = ConversationSet.nya();
+        }
 
         return api.chat(
                 new RequestBody.RequestBuilder()
                         .conversation(conversation)
-                        .chat(system?"system":"user", sb.toString())
+                        .user(content)
                         .build()
         );
     }

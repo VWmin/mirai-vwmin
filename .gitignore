@@ -38,7 +38,8 @@ cache/*
 # bot数据缓存
 data/*
 # 配置文件
-/src/main/resources/application.yaml
+#/src/main/resources/application.yaml
+src/main/resources/application.yml
 # 网络日志
 netLog/*
 # 5kcy结果

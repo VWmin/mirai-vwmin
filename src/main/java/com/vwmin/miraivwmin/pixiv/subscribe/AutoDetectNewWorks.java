@@ -22,8 +22,8 @@ import java.util.Map;
  */
 @Slf4j
 //@Service
-@EnableAsync
-@EnableScheduling
+//@EnableAsync
+//@EnableScheduling
 public class AutoDetectNewWorks {
 
     static final String NEW_WORKS = "newWorks"; // QQ id -> Set<IllustId>

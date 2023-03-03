@@ -9,6 +9,7 @@ import com.vwmin.restproxy.RestProxy;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.LaxRedirectStrategy;
@@ -43,7 +44,9 @@ public class AppConfig {
     @Bean("normalRestTemplate")
     public RestTemplate normalRestTemplate(){
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+        HttpHost proxy = new HttpHost("127.0.0.1", 7890);
         HttpClient httpClient = HttpClientBuilder.create()
+                .setProxy(proxy)
                 .setRedirectStrategy(new LaxRedirectStrategy())
                 .build();
         factory.setHttpClient(httpClient);
