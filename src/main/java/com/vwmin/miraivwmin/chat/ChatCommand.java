@@ -21,23 +21,33 @@ public class ChatCommand {
     @CommandLine.Option(names = {"-r"})
     private boolean r;
 
-    public ResponseBody call(GPTApi api) {
+    public String call(GPTApi api) {
         StringBuilder sb = new StringBuilder();
         Optional.of(word).ifPresent(e -> e.forEach(w->sb.append(w).append(" ")));
         String content = sb.toString();
 
-        List<ChatMessage> conversation;
+        Conversation conversation;
         if (r) {
-            conversation = ConversationSet.r();
+            conversation = Conversation.instance("r");
         } else {
-            conversation = ConversationSet.nya();
+            conversation = Conversation.instance("nya");
         }
 
-        return api.chat(
+        ResponseBody chat = api.chat(
                 new RequestBody.RequestBuilder()
-                        .conversation(conversation)
+                        .conversation(conversation.conversation())
                         .user(content)
                         .build()
         );
+
+        String resp = "error TODO";
+        if (chat != null) {
+            resp = chat.getChoices().get(0).message.content;
+            conversation.add("user", content);
+            conversation.add("assistant", resp);
+        }
+
+
+        return resp;
     }
 }

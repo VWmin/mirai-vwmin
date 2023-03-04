@@ -40,16 +40,20 @@ public class AppConfig {
     private String pixivApi;
     private String imageHome;
     private String gptKey;
+    private boolean enableProxy = false;
+    private String proxyHost;
+    private int proxyPort;
 
     @Bean("normalRestTemplate")
     public RestTemplate normalRestTemplate(){
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-        HttpHost proxy = new HttpHost("127.0.0.1", 7890);
-        HttpClient httpClient = HttpClientBuilder.create()
-                .setProxy(proxy)
-                .setRedirectStrategy(new LaxRedirectStrategy())
-                .build();
-        factory.setHttpClient(httpClient);
+        HttpClientBuilder httpClientBuilder = HttpClientBuilder.create()
+                .setRedirectStrategy(new LaxRedirectStrategy());
+        if (enableProxy) {
+            HttpHost proxy = new HttpHost(proxyHost, proxyPort);
+            httpClientBuilder.setProxy(proxy);
+        }
+        factory.setHttpClient(httpClientBuilder.build());
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(factory);
         return restTemplate;

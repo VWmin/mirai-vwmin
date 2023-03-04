@@ -39,31 +39,30 @@ public class SetuCommandController implements Reply<SetuCommand> {
         if (setuList.size() == 0) {
             return new MessageBuilder().plaintext("啥也没找到惹～").build();
         }
-        if (setuList.size() == 1){
-            return singleSetuMessage(sender, subject, setuList.get(0));
-        }else{
-            ForwardMessageBuilder builder = new ForwardMessageBuilder(bot, subject);
-            for (SetuEntity.DataBean setu : setuList) {
-                builder.botSays(singleSetuMessage(sender, subject, setu));
-            }
+
+        boolean r = false;
+
+        // 全部改成转发消息
+        ForwardMessageBuilder builder = new ForwardMessageBuilder(bot, subject);
+        for (SetuEntity.DataBean setu : setuList) {
+            MessageBuilder singleBuilder = new MessageBuilder();
+            String imgUrl = setu.getUrls().getOriginal();
+            String file = setu.getPid() + imgUrl.substring(imgUrl.length() - 4);
+
+            r = r | setu.getR18();
+
+            builder.botSays(singleBuilder
+                    .image(subject, file, imgUrl)
+                    .build());
+        }
+
+        if (r) {
+            sender.sendMessage(builder.build());
+            return null;
+        } else {
             return builder.build();
         }
 
-
     }
 
-    private Message singleSetuMessage(User sender, Contact subject, SetuEntity.DataBean setu){
-        MessageBuilder builder = new MessageBuilder();
-        String imgUrl = setu.getUrls().getOriginal();
-        String file = setu.getPid() + imgUrl.substring(imgUrl.length() - 4);
-
-        if (setu.getR18() && sender.getId() != 1903215898L) {
-            return builder.plaintext("你寄吧谁¿").build();
-        }
-
-        return builder
-                .at(sender.getId())
-                .image(subject, file, imgUrl)
-                .build();
-    }
 }

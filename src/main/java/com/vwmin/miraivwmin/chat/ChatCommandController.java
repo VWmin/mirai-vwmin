@@ -30,9 +30,8 @@ public class ChatCommandController implements Reply<ChatCommand> {
    @Override
    public Message reply(ChatCommand command, Contact subject, User sender) {
       try{
-         ResponseBody resp = command.call(gptApi);
-         ChatMessage chatMessage = resp.getChoices().get(0).message;
-         return new MessageBuilder().at(sender.getId()).plaintext(chatMessage.content).build();
+         String resp = command.call(gptApi);
+         return new MessageBuilder().at(sender.getId()).plaintext(resp).build();
       } catch (HttpClientErrorException.TooManyRequests  e) {
          return new MessageBuilder().plaintext("少女祈祷中...").build();
       }
