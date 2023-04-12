@@ -13,7 +13,7 @@ import com.vwmin.restproxy.annotations.POST;
 public interface GPTApi {
     @POST("/chat/completions")
     @Headers(headers = {
-            @Header(k = "Authorization", v = "Bearer "),
+            @Header(k = "Authorization", v = "Bearer"),
             @Header(k = "Content-Type", v = "application/json")
     })
     ResponseBody chat(@Json RequestBody body);

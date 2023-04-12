@@ -9,6 +9,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+import xyz.cssxsh.mirai.tool.FixProtocolVersion;
 
 import javax.annotation.PreDestroy;
 import java.io.File;
@@ -25,6 +26,10 @@ public class BotHandler implements ApplicationRunner {
     private Bot bot = null;
     private final ApplicationContext context;
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+    static {
+        FixProtocolVersion.update();
+    }
 
 
     @Value("${bot.netLog}")
@@ -50,7 +55,7 @@ public class BotHandler implements ApplicationRunner {
                 //保存设备信息到文件
                 fileBasedDeviceInfo("deviceInfo.json");
                 //修改登录协议
-                setProtocol(MiraiProtocol.ANDROID_WATCH);
+                setProtocol(MiraiProtocol.MACOS);
                 // setLoginSolver();
                 setBotLoggerSupplier(bot -> new DecorateToSlf4j());
                 // 重定向网络日志到文件
